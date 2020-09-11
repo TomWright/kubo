@@ -39,7 +39,7 @@ Use "kubo [command] --help" for more information about a command.
 
 ## Structure
 
-All kubo manage files are expected to be in a given structure.
+All kubo managed files are expected to be in the following structure.
 
 ```
 - base
