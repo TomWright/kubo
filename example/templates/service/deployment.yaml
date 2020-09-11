@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}-deployment
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        component: {{ .name }}
+  template:
+    metadata:
+      labels:
+        component: {{ .name }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: {{ .image.name }}{{ if .image.version }}:{{ .image.version }}{{ end }}
+          ports:
+            {{ if .grpc.port }}- containerPort: {{ .grpc.port }}{{ end }}
+            {{ if .http.port }}- containerPort: {{ .http.port }}{{ end }}

@@ -1,0 +1,9 @@
+name: user
+replicas: 3
+image:
+  name: mycompany/user
+  version: v2.1.2
+http:
+  port: 8000
+grpc:
+  port: 9000

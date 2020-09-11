@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        component: user
+  template:
+    metadata:
+      labels:
+        component: user
+    spec:
+      containers:
+        - name: user
+          image: mycompany/user:v2.1.2
+          ports:
+            - containerPort: 9000
+            - containerPort: 8000

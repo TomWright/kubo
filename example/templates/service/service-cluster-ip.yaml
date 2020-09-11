@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-cluster-ip
+spec:
+  type: ClusterIP
+  selector:
+    component: {{ .name }}
+  ports:
+    {{ if .grpc.port }}- name: grpc
+      port: {{ .grpc.port  }}
+      targetPort: {{ .grpc.port  }}
+    {{ end }}
+    {{ if .http.port }}- name: http
+      port: {{ .http.port  }}
+      targetPort: {{ .http.port  }}
+    {{ end }}
