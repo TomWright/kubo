@@ -14,7 +14,11 @@ If you have go installed you can use:
 go get github.com/tomwright/kubo/cmd/kubo
 ```
 
-Alternatively you can download a compiled executable from the [latest release](https://github.com/TomWright/kubo/releases/latest).
+Alternatively you can download a compiled executable from the [latest release](https://github.com/TomWright/kubo/releases/latest):
+Ensure you change the desired release executable from the following. It currently targets `kubo_linux_amd64`.
+```
+curl -s https://api.github.com/repos/tomwright/kubo/releases/latest | grep browser_download_url | grep linux_amd64 | cut -d '"' -f 4 | wget -qi - && mv kubo_linux_amd64 kubo && chmod +x kubo
+```
 
 ```
 $ kubo
