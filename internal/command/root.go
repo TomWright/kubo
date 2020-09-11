@@ -27,6 +27,7 @@ func init() {
 		generate(),
 		update(),
 		apply(),
+		version(),
 	)
 
 	RootCMD.PersistentFlags().StringVarP(&envBasePath, "base", "b", ".", "Full path to kubo base directory.")
