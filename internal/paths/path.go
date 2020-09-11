@@ -1,7 +1,6 @@
 package paths
 
 import (
-	"os"
 	"path/filepath"
 )
 
@@ -19,8 +18,8 @@ func TemplateDir(template string) string {
 }
 
 // TemplateFile returns the path to the given template file.
-func TemplateFile(template string, f os.FileInfo) string {
-	return StdPath.TemplateFile(template, f)
+func TemplateFile(template string, filename string) string {
+	return StdPath.TemplateFile(template, filename)
 }
 
 // ManifestDir returns the path to the manifest directory of the given service and environment.
@@ -29,8 +28,8 @@ func ManifestDir(service string, environment string) string {
 }
 
 // ManifestFile returns the path to the given manifest file for the given service and environment.
-func ManifestFile(service string, environment string, f os.FileInfo) string {
-	return StdPath.ManifestFile(service, environment, f)
+func ManifestFile(service string, environment string, filename string) string {
+	return StdPath.ManifestFile(service, environment, filename)
 }
 
 // NewPath returns a new instance of Paths.
@@ -60,8 +59,8 @@ func (p Paths) TemplateDir(template string) string {
 }
 
 // TemplateFile returns the path to the given template file.
-func (p Paths) TemplateFile(template string, f os.FileInfo) string {
-	return filepath.Join(p.TemplateDir(template), f.Name())
+func (p Paths) TemplateFile(template string, filename string) string {
+	return filepath.Join(p.TemplateDir(template), filename)
 }
 
 // ManifestDir returns the path to the manifest directory of the given service and environment.
@@ -70,6 +69,6 @@ func (p Paths) ManifestDir(service string, environment string) string {
 }
 
 // ManifestFile returns the path to the given manifest file for the given service and environment.
-func (p Paths) ManifestFile(service string, environment string, f os.FileInfo) string {
-	return filepath.Join(p.ManifestDir(service, environment), f.Name())
+func (p Paths) ManifestFile(service string, environment string, filename string) string {
+	return filepath.Join(p.ManifestDir(service, environment), filename)
 }

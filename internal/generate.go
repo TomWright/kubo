@@ -16,13 +16,13 @@ func GenerateTemplateFile(f os.FileInfo, serviceName string, environment string,
 		return nil
 	}
 
-	inputFile, err := os.Open(paths.TemplateFile(serviceType, f))
+	inputFile, err := os.Open(paths.TemplateFile(serviceType, f.Name()))
 	if err != nil {
 		return fmt.Errorf("could not open input file: %w", err)
 	}
 	defer inputFile.Close()
 
-	outputFile, err := os.Create(paths.ManifestFile(serviceName, environment, f))
+	outputFile, err := os.Create(paths.ManifestFile(serviceName, environment, f.Name()))
 	if err != nil {
 		return fmt.Errorf("could not create output file: %w", err)
 	}
