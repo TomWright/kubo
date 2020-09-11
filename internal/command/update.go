@@ -46,8 +46,8 @@ func update() *cobra.Command {
 	cmd.Flags().StringVarP(&template, "template", "t", "service", "The template to use when generating manifests.")
 	cmd.Flags().VarP(overrides, "value", "v", "Set a specific config value. -v <path>=<value>")
 	cmd.Flags().VarP(stringOverrides, "string-value", "s", "Set a specific config value to a string. -v <path>=<value>")
-	cmd.Flags().VarP(boolOverrides, "bool-value", "b", "Set a specific config value to a bool. -v <path>=<value>")
-	cmd.Flags().VarP(intOverrides, "int-value", "n", "Set a specific config value to an int. -v <path>=<value>")
+	cmd.Flags().VarP(boolOverrides, "bool-value", "f", "Set a specific config value to a bool. -v <path>=<value>")
+	cmd.Flags().VarP(intOverrides, "int-value", "i", "Set a specific config value to an int. -v <path>=<value>")
 
 	return cmd
 }

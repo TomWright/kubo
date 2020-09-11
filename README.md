@@ -98,8 +98,8 @@ There are different arguments available to allow you to specifically store value
 
 - `-v <name>=<value>` - No parsing is done. Values will be stored as a string since they are given from a command line string.
 - `-s <name>=<value>` - String value.
-- `-n <name>=<value>` - Int value.
-- `-b <name>=<value>` - Bool value. (`true`, `yes`, `t`, `y`, `1`, `false`, `no`, `n`, `0`)
+- `-i <name>=<value>` - Int value.
+- `-f <name>=<value>` - Bool value. (`true`, `yes`, `t`, `y`, `1`, `false`, `no`, `n`, `0`)
 
 ## k8s
 
