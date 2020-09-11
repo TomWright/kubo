@@ -39,6 +39,9 @@ func (of *OverrideFlag) String() string {
 
 // Set is used to add a new value to the OverrideFlag.
 func (of *OverrideFlag) Set(value string) error {
+	if value == "" {
+		return nil
+	}
 	args := strings.Split(value, "=")
 	switch len(args) {
 	case 0:

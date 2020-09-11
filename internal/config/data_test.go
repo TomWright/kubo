@@ -99,6 +99,6 @@ func TestFromBytes(t *testing.T) {
 	}
 
 	if !cmp.Equal(d, testDataA) {
-		t.Errorf("expected data: exp, got\n%T %v\n%T %v\n%s\n", testDataA, testDataA, d, d, cmp.Diff(d, testDataA))
+		t.Errorf("unexpected data:\n%s\n", cmp.Diff(d, testDataA))
 	}
 }
