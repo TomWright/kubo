@@ -15,7 +15,7 @@ func generate() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "generate -t <template to use> -e <environment to use> <service to generate>",
-		Short: "Generate kubernetes manifests for the given service + type.",
+		Short: "Generate kubernetes manifests for the given service, template and environment.",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			for _, serviceName := range args {

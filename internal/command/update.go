@@ -14,7 +14,7 @@ func update() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "update -t <template to use> -e <environment to use> <service name>",
-		Short: "Update config files that are used during kubernetes manifest generation.",
+		Short: "Update config files that are used during manifest generation.",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			for _, serviceName := range args {

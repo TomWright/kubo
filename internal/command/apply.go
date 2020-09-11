@@ -12,7 +12,7 @@ func apply() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "apply -e <environment to use> <service to generate>",
-		Short: "Apply kubernetes manifests for the given service + environment.",
+		Short: "Apply kubernetes manifests for the given service and environment.",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			for _, serviceName := range args {

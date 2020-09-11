@@ -7,6 +7,36 @@
 
 A simple utility to help with kubernetes manifest management and deployment.
 
+## Installation
+
+If you have go installed you can use:
+```
+go get github.com/tomwright/kubo/cmd/kubo
+```
+
+Alternatively you can download a compiled executable from the [latest release](https://github.com/TomWright/kubo/releases/latest).
+
+```
+$ kubo
+A small helper to manage kubernetes configurations.
+
+Usage:
+  kubo [command]
+
+Available Commands:
+  apply       Apply kubernetes manifests for the given service and environment.
+  generate    Generate kubernetes manifests for the given service, template and environment.
+  help        Help about any command
+  update      Update config files that are used during manifest generation.
+
+Flags:
+  -b, --base string          Full path to kubo base directory. (default ".")
+  -e, --environment string   The environment to work with. (default "default")
+  -h, --help                 help for kubo
+
+Use "kubo [command] --help" for more information about a command.
+```
+
 ## Structure
 
 All kubo manage files are expected to be in a given structure.
