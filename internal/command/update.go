@@ -3,14 +3,17 @@ package command
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/tomwright/kubo/internal"
 	"github.com/tomwright/kubo/internal/config"
+	"github.com/tomwright/kubo/internal/oflag"
 	"github.com/tomwright/kubo/internal/paths"
 )
 
 func update() *cobra.Command {
 	var template string
-	var overrides internal.OverrideFlag
+	overrides := oflag.NewOverrideFlag(nil)
+	stringOverrides := oflag.NewOverrideFlag(oflag.StringParser)
+	boolOverrides := oflag.NewOverrideFlag(oflag.BoolParser)
+	intOverrides := oflag.NewOverrideFlag(oflag.IntParser)
 
 	cmd := &cobra.Command{
 		Use:   "update -t <template to use> -e <environment to use> <service name>",
@@ -24,7 +27,7 @@ func update() *cobra.Command {
 					return fmt.Errorf("could not get config: %w", err)
 				}
 
-				for _, o := range overrides {
+				for _, o := range oflag.Combine(overrides, stringOverrides, boolOverrides, intOverrides) {
 					if err := cfg.Set(o.Path, o.Value); err != nil {
 						return fmt.Errorf("could not set property by key: %w", err)
 					}
@@ -41,7 +44,10 @@ func update() *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&template, "template", "t", "service", "The template to use when generating manifests.")
-	cmd.Flags().VarP(&overrides, "value", "v", "Set a specific config value. -v <path>=<value>")
+	cmd.Flags().VarP(overrides, "value", "v", "Set a specific config value. -v <path>=<value>")
+	cmd.Flags().VarP(stringOverrides, "string-value", "s", "Set a specific config value to a string. -v <path>=<value>")
+	cmd.Flags().VarP(boolOverrides, "bool-value", "b", "Set a specific config value to a bool. -v <path>=<value>")
+	cmd.Flags().VarP(intOverrides, "int-value", "n", "Set a specific config value to an int. -v <path>=<value>")
 
 	return cmd
 }

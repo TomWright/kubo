@@ -1,13 +1,13 @@
-package internal_test
+package oflag_test
 
 import (
 	"github.com/google/go-cmp/cmp"
-	"github.com/tomwright/kubo/internal"
+	"github.com/tomwright/kubo/internal/oflag"
 	"testing"
 )
 
 func TestOverrideFlag_Set(t *testing.T) {
-	overrides := make(internal.OverrideFlag, 0)
+	overrides := oflag.NewOverrideFlag(oflag.StringParser)
 	if err := overrides.Set("a=asd"); err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
@@ -24,7 +24,7 @@ func TestOverrideFlag_Set(t *testing.T) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	exp := internal.OverrideFlag{
+	exp := []*oflag.Override{
 		{
 			Path:  "a",
 			Value: "asd",
@@ -43,7 +43,27 @@ func TestOverrideFlag_Set(t *testing.T) {
 		},
 	}
 
-	if !cmp.Equal(exp, overrides) {
-		t.Errorf("unexpected data:\n%s\n", cmp.Diff(exp, overrides))
+	got := overrides.Overrides()
+
+	if !cmp.Equal(exp, got) {
+		t.Errorf("unexpected data:\n%s\n", cmp.Diff(exp, got))
+	}
+}
+
+func TestCombine(t *testing.T) {
+	a := oflag.NewOverrideFlag(nil)
+	b := oflag.NewOverrideFlag(nil)
+	c := oflag.NewOverrideFlag(nil)
+	_ = a.Set("a=1")
+	_ = b.Set("b=2")
+	_ = c.Set("c=3")
+	got := oflag.Combine(a, b, c)
+	exp := []*oflag.Override{
+		{Path: "a", Value: "1"},
+		{Path: "b", Value: "2"},
+		{Path: "c", Value: "3"},
+	}
+	if !cmp.Equal(exp, got) {
+		t.Errorf("unexpected combined result:\n%s\n", cmp.Diff(exp, got))
 	}
 }

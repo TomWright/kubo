@@ -32,8 +32,7 @@ func (d Data) set(keys []string, value interface{}) error {
 	case 0:
 		return nil
 	case 1:
-		d[keys[0]] = value
-		return nil
+		return d.setValue(keys[0], value)
 	}
 
 	keyData, err := d.Data(keys[0])
@@ -47,6 +46,13 @@ func (d Data) set(keys []string, value interface{}) error {
 	default:
 		return err
 	}
+}
+
+// setValue sets the value in the data.
+// It attempts to do some parsing to ensure the correct type is used.
+func (d Data) setValue(key string, value interface{}) error {
+	d[key] = value
+	return nil
 }
 
 // DataR returns a Data type that must exist at the given key.
