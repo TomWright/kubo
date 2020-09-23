@@ -86,24 +86,13 @@ Contains the values used when parsing the templates.
 
 The name of the config file should match the name of the template you are generating.
 
-You can update these files directly, or by using the `kubo` commandline tool:
+You can update these files directly, or by using the [`dasel`](https://github.com/TomWright/dasel) command line tool:
 
 ```
-kubo update -e development -v http.port=8080 -v image.version=v1.0.0 auth
+dasel put string -f config/auth/development/service.yaml -s "image.version" v1.0.0
 ```
 
 The above updates the `service.yaml` template config within the `development` environment, for the service `auth`.
-
-If you want to change the values for a different template you can pass `-t <template name>`.
-
-### Types
-
-There are different arguments available to allow you to specifically store values as different types.
-
-- `-v <name>=<value>` - No parsing is done. Values will be stored as a string since they are given from a command line string.
-- `-s <name>=<value>` - String value.
-- `-i <name>=<value>` - Int value.
-- `-f <name>=<value>` - Bool value. (`true`, `yes`, `t`, `y`, `1`, `false`, `no`, `n`, `0`)
 
 ## k8s
 

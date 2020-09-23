@@ -16,6 +16,11 @@ http:
   port: 8000
 grpc:
   port: 9000
+env:
+  - name: A
+    value: auth-cluster-ip
+  - name: B
+    value: asdasd
 `
 
 var testDataA = config.Data{
@@ -30,6 +35,10 @@ var testDataA = config.Data{
 	},
 	"grpc": config.Data{
 		"port": 9000,
+	},
+	"env": []interface{}{
+		config.Data{"name": "A", "value": "auth-cluster-ip"},
+		config.Data{"name": "B", "value": "asdasd"},
 	},
 }
 

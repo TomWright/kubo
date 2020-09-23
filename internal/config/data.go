@@ -20,6 +20,8 @@ var (
 // It could be a root element, or a child element somewhere in the config tree.
 type Data map[interface{}]interface{}
 
+type DataList []interface{}
+
 // Set sets the given value under the given key.
 // The key supports the use of dots to identity object access.
 func (d Data) Set(key string, value interface{}) error {
@@ -69,6 +71,21 @@ func (d Data) Data(key string) (Data, error) {
 	val, _ := d[key]
 	switch v := val.(type) {
 	case Data:
+		return v, nil
+	case nil:
+		return nil, ErrNotFound
+	default:
+		return nil, ErrUnexpectedType
+	}
+}
+
+// DataList returns a DataList type from the given key.
+func (d Data) DataList(key string) (DataList, error) {
+	val, _ := d[key]
+	switch v := val.(type) {
+	case []interface{}:
+		return DataList(v), nil
+	case DataList:
 		return v, nil
 	case nil:
 		return nil, ErrNotFound

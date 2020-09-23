@@ -2,6 +2,7 @@ package command
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/tomwright/kubo/internal"
 	"github.com/tomwright/kubo/internal/paths"
 )
 
@@ -11,10 +12,9 @@ var (
 )
 
 var RootCMD = &cobra.Command{
-	Use:        "kubo",
-	Aliases:    nil,
-	SuggestFor: nil,
-	Short:      "A small helper to manage kubernetes configurations.",
+	Use:     "kubo",
+	Version: internal.Version,
+	Short:   "A small helper to manage kubernetes configurations.",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		if envBasePath != "" {
 			paths.StdPath.SetBase(envBasePath)
@@ -25,9 +25,7 @@ var RootCMD = &cobra.Command{
 func init() {
 	RootCMD.AddCommand(
 		generate(),
-		update(),
 		apply(),
-		version(),
 	)
 
 	RootCMD.PersistentFlags().StringVarP(&envBasePath, "base", "b", ".", "Full path to kubo base directory.")
